@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">2Doo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="app_long_name">2Doo &#8212; The @pp that helps you get cr@p done!</string>
+    <string name="app_description">The @pp that helps you get cr@p done!</string>
+    <string name="about_button_text">About</string>
+    <string name="about_dialog_title">About 2Doo &#8212; The @pp that helps you get cr@p done!</string>
+    <string name="new_list_button_text">New 2Doo List</string>
+    <string name="new_list_dialog_title">Let\'s get some cr@p done &#8212; Start a new list!</string>
+    <string name="about_text">
+		<p>Need to keep track of work to be done? Use a <b>2 Doo</b> list.</p>
+		<p>Trying to get rid of some nasty habits? Use a <b>Don\'t Doo</b> list.</p>
+		<p>Regret something you did? Use a <b>Un Doo</b> list.</p>
+		<p>Reuse existing <b>2 Doo</b> lists with <b>ReDoo.</b></p>
+		<p><i>You\'ve got to manage a lot of crap in your life &#8212; We help you doo it!</i></p>
+	</string>
+	<string name="twodoo_title">2 Doo</string>
+	<string name="dontdoo_title">Don\'t Doo</string>
+	<string name="undoo_title">Un Doo</string>
+	<string name="cantdoo_title">Can\'t Doo</string>
+	<string name="candoo_title">Can Doo</string>
+	<string name="twodoo_type">twodoo</string>
+	<string name="dontdoo_type">dontdoo</string>
+	<string name="undoo_type">undo</string>
+	<string name="cantdoo_type">cantdoo</string>
+	<string name="candoo_type">candoo</string>
+	<string name="blank_summary"></string>
+	
+	<string name="settings_label">Settings &#8230;</string>
+	<string name="settings_title">2Doo settings</string>
+	<string name="settings_shortcut">s</string>
+</resources>

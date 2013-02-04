@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list_types">
+        <item>twodoo</item>
+        <item>dontdoo</item>
+        <item>undo</item>
+        <item>cantdoo</item>
+        <item>candoo</item>
+    </string-array>
+    <string-array name="list_names">
+        <item>2Doo</item>
+        <item>Don\'t Doo</item>
+        <item>Un Doo</item>
+        <item>Can\'t Doo</item>
+        <item>Can Doo</item>
+    </string-array>
+    <string-array name="list_defaults">
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+    </string-array>
+    <!--
+    <array name="list_icons">
+        <item>@drawable/twoDoo</item>
+        <item>@drawable/dontDoo</item>
+        <item>@drawable/unDoo</item>
+        <item>@drawable/cantDoo</item>
+        <item>@drawable/candoo</item>
+        <item>@drawable/kenya</item>
+    </array>
+	-->
+</resources>
