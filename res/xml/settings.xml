@@ -2,33 +2,52 @@
 <PreferenceScreen
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	 android:key="settings">
-    <PreferenceCategory android:title="Standard Options">
+    <PreferenceCategory id="@string/standard_group_key" android:title="@string/standard_group_title">
 		<CheckBoxPreference
-			android:key="@string/twodoo_type"
+			android:key="@string/twodoo_key"
 			android:title="@string/twodoo_title"
-			android:summary="@string/blank_summary"
-			android:defaultValue="true" />
+			android:summary="@string/twodoo_summary"
+			android:icon="@string/twodoo_icon"
+			android:defaultValue="@string/twodoo_default" />
 		<CheckBoxPreference
-			android:key="@string/dontdoo_type"
+			android:key="@string/dontdoo_key"
 			android:title="@string/dontdoo_title"
-			android:summary="@string/blank_summary"
-			android:defaultValue="true" />
+			android:summary="@string/dontdoo_summary"
+			android:icon="@string/dontdoo_icon"
+			android:defaultValue="@string/undoo_default" />
 		<CheckBoxPreference
-			android:key="@string/undoo_type"
+			android:key="@string/undoo_key"
 			android:title="@string/undoo_title"
-			android:summary="@string/blank_summary"
-			android:defaultValue="true" />
+			android:summary="@string/undoo_summary"
+			android:icon="@string/undoo_icon"
+			android:defaultValue="@string/undoo_default" />
 	</PreferenceCategory>
-	<PreferenceCategory android:title="Enterprise Options">
+	<PreferenceCategory id="@string/enterprise_group_key" android:title="@string/enterprise_group_title">
 		<CheckBoxPreference
-			android:key="@string/cantdoo_type"
+			android:key="@string/cantdoo_key"
 			android:title="@string/cantdoo_title"
-			android:summary="@string/blank_summary"
-			android:defaultValue="false" />
+			android:summary="@string/cantdoo_summary"
+			android:icon="@string/cantdoo_icon"
+			android:defaultValue="@string/cantdoo_default" />
 		<CheckBoxPreference
-			android:key="@string/candoo_type"
+			android:key="@string/candoo_key"
 			android:title="@string/candoo_title"
-			android:summary="@string/blank_summary"
-			android:defaultValue="false" />
+			android:summary="@string/candoo_summary"
+			android:icon="@string/candoo_icon"
+			android:defaultValue="@string/candoo_default" />
+	</PreferenceCategory>
+	<PreferenceCategory id="@string/literary_group_key" android:title="@string/literary_group_title">
+		<CheckBoxPreference
+			android:key="@string/bartleby_key"
+			android:title="@string/bartleby_title"
+			android:summary="@string/bartleby_summary"
+			android:icon="@string/bartleby_icon"
+			android:defaultValue="@string/bartleby_default" />
+		<CheckBoxPreference
+			android:key="@string/hamlet_key"
+			android:title="@string/hamlet_title"
+			android:summary="@string/hamlet_summary"
+			android:icon="@string/hamlet_icon"
+			android:defaultValue="@string/hamlet_default" />
 	</PreferenceCategory>
 </PreferenceScreen>

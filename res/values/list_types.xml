@@ -1,34 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="list_types">
-        <item>twodoo</item>
-        <item>dontdoo</item>
-        <item>undo</item>
-        <item>cantdoo</item>
-        <item>candoo</item>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+   
+    <string-array name="twodoo">
+        <item name="id">@string/twodoo_key</item>
+        <item name="group">@string/standard_group_key</item>
+        <item name="title">@string/twodoo_title</item>
+        <item name="summary">@string/twodoo_summary</item>
+        <item name="default">@string/twodoo_default</item>
+        <item name="icon">@string/twodoo_icon</item>
     </string-array>
-    <string-array name="list_names">
-        <item>2Doo</item>
-        <item>Don\'t Doo</item>
-        <item>Un Doo</item>
-        <item>Can\'t Doo</item>
-        <item>Can Doo</item>
+     <string-array name="twodo">
+        <item name="id">@string/dontdoo_key</item>
+        <item name="group">@string/standard_group_key</item>
+        <item name="title">@string/dontdoo_title</item>
+        <item name="summary">@string/dontdoo_summary</item>
+        <item name="default">@string/dontdoo_default</item>
+        <item name="icon">@string/dontdoo_icon</item>
     </string-array>
-    <string-array name="list_defaults">
-        <item>true</item>
-        <item>true</item>
-        <item>true</item>
-        <item>false</item>
-        <item>false</item>
+    <string-array name="undoo">
+        <item name="id">@string/undoo_key</item>
+        <item name="group">@string/standard_group_key</item>
+        <item name="title">@string/candoo_title</item>
+        <item name="summary">@string/candoo_summary</item>
+        <item name="default">@string/candoo_default</item>
+        <item name="icon">@string/candoo_icon</item>
     </string-array>
-    <!--
-    <array name="list_icons">
-        <item>@drawable/twoDoo</item>
-        <item>@drawable/dontDoo</item>
-        <item>@drawable/unDoo</item>
-        <item>@drawable/cantDoo</item>
-        <item>@drawable/candoo</item>
-        <item>@drawable/kenya</item>
+    <string-array name="cantdoo">
+        <item name="id">@string/cantdoo_key</item>
+        <item name="group">@string/enterprise_group_key</item>
+        <item name="title">@string/cantdoo_title</item>
+        <item name="summary">@string/cantdoo_summary</item>
+        <item name="default">@string/cantdoo_default</item>
+        <item name="icon">@string/cantdoo_icon</item>
+    </string-array>
+    <string-array name="candoo">
+         <item name="id">@string/candoo_key</item>
+        <item name="group">@string/enterprise_group_key</item>
+        <item name="title">@string/candoo_title</item>
+        <item name="summary">@string/candoo_summary</item>
+        <item name="default">@string/candoo_default</item>
+        <item name="icon">@string/candoo_icon</item>
+    </string-array>
+    <string-array name="bartleby">
+        <item name="id">@string/bartleby_key</item>
+        <item name="group">@string/literary_group_key</item>
+        <item name="title">@string/bartleby_title</item>
+        <item name="summary">@string/bartleby_summary</item>
+        <item name="default">@string/bartleby_default</item>
+        <item name="icon">@string/bartleby_icon</item>
+    </string-array>
+     <string-array name="hamlet">
+        <item name="id">@string/hamlet_key</item>
+        <item name="group">@string/literary_group_key</item>
+        <item name="title">@string/hamlet_title</item>
+        <item name="summary">@string/hamlet_summary</item>
+        <item name="default">@string/hamlet_default</item>
+        <item name="icon">@string/hamlet_icon</item>
+    </string-array> 
+   
+    <array name="prefs_index">
+        <item>@string/twodoo_array</item>
+        <item>@string/dontdoo_array</item>
+        <item>@string/undoo_array</item>
+        <item>@string/cantdoo_array</item>
+        <item>@string/candoo_array</item>
+        <item>@string/bartleby_array</item>
+        <item>@string/hamlet_array</item>
     </array>
-	-->
+   
 </resources>
