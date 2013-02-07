@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-	<!-- android:padding="30dip" >-->
+    android:layout_height="match_parent" 
+	android:padding="15dip" >
 	<Button
         android:id="@+id/about_button"
         android:layout_width="match_parent"
@@ -11,18 +11,36 @@
         android:layout_alignParentTop="false"
         android:text="@string/about_button_text" >
     </Button>
-	<Button
-        android:id="@+id/new_list_button"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/input_section"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="false"
-        android:text="@string/new_list_button_text" 
-        android:layout_below="@id/about_button">
-    </Button> 
+	    android:layout_height="match_parent" 
+	    android:focusable="true"
+	    android:focusableInTouchMode="true"
+		android:layout_below="@id/about_button">
+		    <EditText android:id="@+id/new_list_input_text" 
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:hint="@string/new_list_input_hint"
+		        android:inputType="textMultiLine"
+		        android:layout_weight="0.60">
+		    </EditText>
+		    <Spinner android:id="@+id/new_list_type_selector" 
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:layout_weight="0.20">
+		    </Spinner>
+			<Button
+		        android:id="@+id/new_list_button"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:text="@string/new_list_button_text" 
+		        android:layout_weight="0.20">
+		    </Button> 
+	</LinearLayout>
     <ListView android:id="@+id/list_of_lists" 
     	android:layout_height="wrap_content" 
     	android:layout_width="match_parent" 
-    	android:layout_below="@id/new_list_button">
+    	android:layout_below="@id/input_section">
     </ListView>
 </RelativeLayout>

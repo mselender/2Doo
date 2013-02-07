@@ -8,7 +8,8 @@
     <string name="app_description">The @pp that helps you get cr@p done!</string>
     <string name="about_button_text">About</string>
     <string name="about_dialog_title">About 2 Doo &#8212; The @pp that helps you get cr@p done!</string>
-    <string name="new_list_button_text">New 2 Doo List</string>
+    <string name="new_list_button_text">New List</string>
+    <string name="new_list_input_hint">enter name for your new list</string>
     <string name="new_list_dialog_title">Let\'s get some cr@p done &#8212; Start a new list!</string>
     <string name="about_text">
 		<p>Need to keep track of work to be done? Use a <b>2 Doo</b> list.\n</p>
