@@ -20,7 +20,7 @@ public class DooDBHelper extends SQLiteOpenHelper {
    private static final String ITEMS_TABLE_CREATE_SQL =
 		   "CREATE TABLE items (list_id REAL NOT NULL, id REAL NOT NULL, " +
 				   "description TEXT NOT NULL, " + 
-				   "created DATE NOT NULL, completed DATEL, " +
+				   "created DATE NOT NULL, target DATE, completed DATE, " +
 				   "PRIMARY KEY (list_id, id), " +
 				   "FOREIGN KEY (list_id) REFERENCES lists(id));";
 
