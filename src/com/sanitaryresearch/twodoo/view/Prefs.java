@@ -4,21 +4,23 @@ package com.sanitaryresearch.twodoo.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.prefs.Preferences;
+//import java.util.Map;
+//import java.util.prefs.Preferences;
 
-import android.app.Activity;
+//import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 //import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
+//import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
-public class Prefs extends PreferenceActivity {
+public class Prefs extends PreferenceActivity 
+	implements OnSharedPreferenceChangeListener {
    // Option names and default values
    
 	@Override
@@ -59,6 +61,27 @@ public class Prefs extends PreferenceActivity {
 	   } 
 	   PrefsHolder prefsHolder = new PrefsHolder(enabledListTypeKeys, enabledListTypeNames, enabledListTypeIcons);
 	   return prefsHolder;
+   }
+   
+   @Override
+   protected void onResume() {
+       super.onResume();
+       // Set up a listener whenever a key changes
+       getPreferenceScreen().getSharedPreferences()
+               .registerOnSharedPreferenceChangeListener(this);
+   }
+
+   @Override
+   protected void onPause() {
+       super.onPause();
+       // Unregister the listener whenever a key changes
+       getPreferenceScreen().getSharedPreferences()
+               .unregisterOnSharedPreferenceChangeListener(this);
+   }
+
+   public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,String key) 
+   {
+     // do stuff
    }
 
 }

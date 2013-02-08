@@ -6,6 +6,8 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -39,6 +41,7 @@ public class TwoDoo extends Activity implements OnClickListener{
 	List<String> enabledListTypeKeys;
 	List<String> enabledListTypeNames;
 	List<Integer> enabledListTypeIcons;
+	//Context context;
 	
 
 	@Override
@@ -68,35 +71,32 @@ public class TwoDoo extends Activity implements OnClickListener{
 	    View newListButton = findViewById(R.id.new_list_button);
 	    newListButton.setOnClickListener(this);
 	  
-	    
 	    /* set up spinner to have only enabled list types */
-	
-	    Prefs prefs = new Prefs();
-	    PrefsHolder prefsHolder = prefs.getEnabledPrefs(context);
-	    enabledListTypeKeys = prefsHolder.getTypeKeys();
-		enabledListTypeNames = prefsHolder.getTypeNames();
-		enabledListTypeIcons = prefsHolder.getTypeIcons();
-	    Spinner spinner = (Spinner) findViewById(R.id.new_list_type_selector); 
-	    /*
-	    ArrayAdapter a = new ArrayAdapter(this, android.R.layout.simple_spinner_item, enabledListTypeNames);
-	    *./
-	    /*
-	    ListTypeSpinnerAdapter adapter = new ListTypeSpinnerAdapter(context, android.R.layout.simple_spinner_item, enabledListTypeNames, enabledListTypeIcons);  
-	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	    spinner.setAdapter(adapter);
-	    */
+	    RefreshSpinner(context);
 	   
-	    ArrayList<ListTypeHolder> objects = new ArrayList<ListTypeHolder>();
-        for (int k = 0; k < enabledListTypeKeys.size(); k++) {
-        	ListTypeHolder obj = new ListTypeHolder();
-            obj.setAll(R.drawable.twodoo_launcher, enabledListTypeNames.get(k));
-            objects.add(obj);
-        }
- 
-        spinner.setAdapter(new ListTypeSpinnerAdapterA(this, objects));
-		
-	    /*
+	    /* set up text edit */
 		EditText editText = (EditText) findViewById(R.id.new_list_input_text);
+		editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+		
+		
+		
+		
+		/* listeners */
+		/* not working yet */
+		/*
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		OnSharedPreferenceChangeListener sharedPrefsListener = new SharedPreferences.OnSharedPreferenceChangeListener(){
+		   public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+		     // Implementation
+			   Context context = getApplicationContext();
+			   RefreshSpinner(context);
+		   };
+		 };
+		
+		prefs.registerOnSharedPreferenceChangeListener(sharedPrefsListener);
+		*/
+		
+		/*
 		editText.setOnEditorActionListener(new OnEditorActionListener() {
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -126,6 +126,23 @@ public class TwoDoo extends Activity implements OnClickListener{
 	    });
 	    */
 	}
+	
+	@Override
+	   protected void onResume() {
+	      super.onResume();
+	     
+	      /* until we have a listener working for preference changes sett up, we'll refresh spinner here */
+	      Context context = getApplicationContext();
+	      RefreshSpinner(context);
+	    
+	   }
+
+	   @Override
+	   protected void onPause() {
+	      super.onPause();
+	      
+	   }
+
 
 	protected Object getItemAtPosition(int position) {
 		// TODO Auto-generated method stub
@@ -145,8 +162,9 @@ public class TwoDoo extends Activity implements OnClickListener{
 	      switch (item.getItemId()) {
 	      case R.id.settings:
 	         startActivity(new Intent(this, Prefs.class));
+	         Context context = getApplicationContext();
+	         RefreshSpinner(context);
 	         return true;
-	      // More items go here (if any) ...
 	      }
 	      return false;
 	   }
@@ -180,11 +198,44 @@ public class TwoDoo extends Activity implements OnClickListener{
 		         break;
 		         */
 			}
-	   }
+	}
+	
+	private void RefreshSpinner(Context context) {
+		
+	    /* set up spinner to have only enabled list types */
+		
+	    Prefs prefs = new Prefs();
+	    PrefsHolder prefsHolder = prefs.getEnabledPrefs(context);
+	    enabledListTypeKeys = prefsHolder.getTypeKeys();
+		enabledListTypeNames = prefsHolder.getTypeNames();
+		enabledListTypeIcons = prefsHolder.getTypeIcons();
+	    Spinner spinner = (Spinner) findViewById(R.id.new_list_type_selector); 
+	    /*
+	    ArrayAdapter a = new ArrayAdapter(this, android.R.layout.simple_spinner_item, enabledListTypeNames);
+	    *./
+	    /*
+	    ListTypeSpinnerAdapter adapter = new ListTypeSpinnerAdapter(context, android.R.layout.simple_spinner_item, enabledListTypeNames, enabledListTypeIcons);  
+	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	    spinner.setAdapter(adapter);
+	    */
+	   
+	    ArrayList<ListTypeHolder> objects = new ArrayList<ListTypeHolder>();
+        for (int k = 0; k < enabledListTypeKeys.size(); k++) {
+        	ListTypeHolder obj = new ListTypeHolder();
+            obj.setAll(R.drawable.twodoo_launcher, enabledListTypeNames.get(k));
+            objects.add(obj);
+        }
+ 
+        spinner.setAdapter(new ListTypeSpinnerAdapterA(this, objects));
+		
+		
+	}
 	
 
 
 }
+
+
 
 /*
 Use this after your super.onCreate(savedInstanceState); call:

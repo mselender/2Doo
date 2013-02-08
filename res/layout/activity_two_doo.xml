@@ -24,7 +24,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_width ="wrap_content"
 		        android:hint="@string/new_list_input_hint"
-		        android:inputType="text"
+		        android:inputType="textMultiLine"
 		        android:layout_weight="0.60">
 		    </EditText>
 		    <Spinner android:id="@+id/new_list_type_selector" 
