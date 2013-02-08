@@ -61,7 +61,7 @@
 	<string name="candoo_default">false</string>
 	<string name="bartleby_default">false</string>
 	<string name="hamlet_default">false</string>
-	
+	<!--  
 	<string name="twodoo_array" key="@array/twodoo"></string>
 	<string name="dontdoo_array" key="@array/dontdoo"></string>
 	<string name="undoo_array" key="@array/undoo"></string>
@@ -69,7 +69,7 @@
 	<string name="candoo_array" key="@array/candoo"></string>
 	<string name="bartleby_array" key="@array/bartleby"></string>
 	<string name="hamlet_array" key="@array/hamlet"></string>
-	
+	-->
 	<string name="settings_label">Settings &#8230;</string>
 	<string name="settings_title">2 Doo settings</string>
 	<string name="settings_shortcut">s</string>

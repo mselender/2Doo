@@ -1,0 +1,28 @@
+package com.sanitaryresearch.twodoo.view;
+
+public class ListTypeHolder {
+ 
+    String listTypeTitle;
+    int listTypeImageId;
+ 
+    public String getTitle() {
+        return listTypeTitle;
+    }
+ 
+    public void setTitle(String listTypeTitle) {
+        this.listTypeTitle = companylistTypeTitle
+ 
+ 
+    public int getImageId() {
+        return listImageId;
+    }
+ 
+    public void setImageId(int listImageId) {
+        this.listImageId = listI:mageId;
+    }
+ 
+    public void setAll(int listImageId, String listTypeTitle) {
+        setListTypeImageId(listTypeImageId);
+        setListTypeTitle(listTypeTitle);
+    }
+}

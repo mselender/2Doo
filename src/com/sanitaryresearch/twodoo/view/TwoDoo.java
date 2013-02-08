@@ -1,7 +1,12 @@
 package com.sanitaryresearch.twodoo.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
@@ -12,11 +17,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 //import com.sanitaryresearch.twodoo.R;
 //import android.app.AlertDialog;
@@ -27,6 +36,9 @@ import android.widget.TextView.OnEditorActionListener;
 
 public class TwoDoo extends Activity implements OnClickListener{
 	
+	List<String> enabledListTypeKeys;
+	List<String> enabledListTypeNames;
+	List<Integer> enabledListTypeIcons;
 	
 
 	@Override
@@ -34,13 +46,17 @@ public class TwoDoo extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_LEFT_ICON);
 		setContentView(R.layout.activity_two_doo);
-		getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.twodoo_launcher);
+		//getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.twodoo_launcher);
+		getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.string.twodoo_icon);
 		this.setTitle(R.string.app_long_name);
 		
-		//Context ctx = getApplicationContext();
+		Context context = getApplicationContext();
+	
 		//Resources res = ctx.getResources();
 		
 		PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+	
+		//addPreferencesFromResource(R.xml.settings);
 				
 		//TextView textViewDescription = (TextView)findViewById(R.id.description);
 		//textViewDescription.setTextSize(getResources().getDimension(R.dimen.textsize));
@@ -51,14 +67,34 @@ public class TwoDoo extends Activity implements OnClickListener{
 	    aboutButton.setOnClickListener(this);
 	    View newListButton = findViewById(R.id.new_list_button);
 	    newListButton.setOnClickListener(this);
+	  
 	    
-		
-	    Spinner spinner = (Spinner) findViewById(R.id.new_list_type_selector);
+	    /* set up spinner to have only enabled list types */
+	
+	    Prefs prefs = new Prefs();
+	    PrefsHolder prefsHolder = prefs.getEnabledPrefs(context);
+	    enabledListTypeKeys = prefsHolder.getTypeKeys();
+		enabledListTypeNames = prefsHolder.getTypeNames();
+		enabledListTypeIcons = prefsHolder.getTypeIcons();
+	    Spinner spinner = (Spinner) findViewById(R.id.new_list_type_selector); 
 	    /*
-	    ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, NoCore_Array);
+	    ArrayAdapter a = new ArrayAdapter(this, android.R.layout.simple_spinner_item, enabledListTypeNames);
+	    *./
+	    /*
+	    ListTypeSpinnerAdapter adapter = new ListTypeSpinnerAdapter(context, android.R.layout.simple_spinner_item, enabledListTypeNames, enabledListTypeIcons);  
 	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	    spinner.setAdapter(adapter);
 	    */
+	   
+	    ArrayList<ListTypeHolder> objects = new ArrayList<ListTypeHolder>();
+        for (int k = 0; k < enabledListTypeKeys.size(); k++) {
+        	ListTypeHolder obj = new ListTypeHolder();
+            obj.setAll(R.drawable.twodoo_launcher, enabledListTypeNames.get(k));
+            objects.add(obj);
+        }
+ 
+        spinner.setAdapter(new ListTypeSpinnerAdapterA(this, objects));
+		
 	    /*
 		EditText editText = (EditText) findViewById(R.id.new_list_input_text);
 		editText.setOnEditorActionListener(new OnEditorActionListener() {
@@ -73,6 +109,27 @@ public class TwoDoo extends Activity implements OnClickListener{
 			}
 		});
 		*/
+	    /*
+	    Spinner listTypeSelector = (Spinner)findViewById(R.id.new_list_type_selector);
+	    listTypeSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
+	    	@Override
+	    	public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+	    		//String list_key = parentView.getItemAtPosition(position).toString();
+	    		int icon_key = enabledListTypeIcons.get(position);
+	    		Button newListButton = (Button) findViewById(R.id.new_list_button);
+	    		newListButton.setCompoundDrawablesWithIntrinsicBounds(icon_key, 0, 0, 0); 
+	        }
+	    	 @Override
+    	    public void onNothingSelected(AdapterView<?> parentView) {
+    	        // your code here
+    	    }
+	    });
+	    */
+	}
+
+	protected Object getItemAtPosition(int position) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -101,16 +158,27 @@ public class TwoDoo extends Activity implements OnClickListener{
 		         startActivity(about);
 		         break;
 	      	case R.id.new_list_button:
-
-		    	 EditText editText = (EditText) findViewById(R.id.new_list_input_text);
-		    	 CharSequence listName = editText.getText();
+	      		
+		      	 Context context = getApplicationContext();
+		      	 int duration = Toast.LENGTH_SHORT;
+		      	
+			     EditText editText = (EditText) findViewById(R.id.new_list_input_text);
+			     String newListName = editText.getText().toString();
+		    	 //Toast toast = Toast.makeText(context, newListName, duration);
+		    	 //toast.show();
+		    	 
 		    	 Spinner spinner = (Spinner) findViewById(R.id.new_list_type_selector);
-		    	 String listType = spinner.getSelectedItem().toString();
+		    	 String listTypeName = spinner.getSelectedItem().toString();
 		    	 Integer pos = spinner.getSelectedItemPosition();
+		    	 //toast = Toast.makeText(context, listTypeName, duration);   	 
+		    	 //toast.show();
+		    	 
 		    	 //Intent newListMenu = new Intent(this, NewListMenu.class);
+		    	 /*
 		    	 Intent newListMenu = new Intent(this, NewListMenu.class);
 		         startActivity(newListMenu);
 		         break;
+		         */
 			}
 	   }
 	

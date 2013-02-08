@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     
-   
+    <!-- 
     <string-array name="twodoo">
         <item name="id">@string/twodoo_key</item>
         <item name="group">@string/standard_group_key</item>
@@ -10,6 +10,7 @@
         <item name="default">@string/twodoo_default</item>
         <item name="icon">@string/twodoo_icon</item>
     </string-array>
+    
      <string-array name="twodo">
         <item name="id">@string/dontdoo_key</item>
         <item name="group">@string/standard_group_key</item>
@@ -18,6 +19,7 @@
         <item name="default">@string/dontdoo_default</item>
         <item name="icon">@string/dontdoo_icon</item>
     </string-array>
+    
     <string-array name="undoo">
         <item name="id">@string/undoo_key</item>
         <item name="group">@string/standard_group_key</item>
@@ -26,6 +28,7 @@
         <item name="default">@string/candoo_default</item>
         <item name="icon">@string/candoo_icon</item>
     </string-array>
+    
     <string-array name="cantdoo">
         <item name="id">@string/cantdoo_key</item>
         <item name="group">@string/enterprise_group_key</item>
@@ -34,6 +37,7 @@
         <item name="default">@string/cantdoo_default</item>
         <item name="icon">@string/cantdoo_icon</item>
     </string-array>
+    
     <string-array name="candoo">
          <item name="id">@string/candoo_key</item>
         <item name="group">@string/enterprise_group_key</item>
@@ -42,6 +46,7 @@
         <item name="default">@string/candoo_default</item>
         <item name="icon">@string/candoo_icon</item>
     </string-array>
+    
     <string-array name="bartleby">
         <item name="id">@string/bartleby_key</item>
         <item name="group">@string/literary_group_key</item>
@@ -50,6 +55,7 @@
         <item name="default">@string/bartleby_default</item>
         <item name="icon">@string/bartleby_icon</item>
     </string-array>
+    
      <string-array name="hamlet">
         <item name="id">@string/hamlet_key</item>
         <item name="group">@string/literary_group_key</item>
@@ -58,15 +64,52 @@
         <item name="default">@string/hamlet_default</item>
         <item name="icon">@string/hamlet_icon</item>
     </string-array> 
-   
-    <array name="prefs_index">
-        <item>@string/twodoo_array</item>
-        <item>@string/dontdoo_array</item>
-        <item>@string/undoo_array</item>
-        <item>@string/cantdoo_array</item>
-        <item>@string/candoo_array</item>
-        <item>@string/bartleby_array</item>
-        <item>@string/hamlet_array</item>
+    
+     <array name="prefs_index">
+        <item>@string/twodoo_key</item>
+        <item>@string/dontdoo_key/item>
+        <item>@string/undoo_key</item>
+        <item>@string/cantdoo_key</item>
+        <item>@string/candoo_key/item>
+        <item>@string/bartleby_key</item>
+        <item>@string/hamlet_key</item>
     </array>
-   
+  	-->
+    <string-array name="list_types">
+        <item>@string/twodoo_key</item>
+        <item>@string/dontdoo_key</item>
+        <item>@string/undoo_key</item>
+        <item>@string/cantdoo_key</item>
+        <item>@string/candoo_key</item>
+        <item>@string/bartleby_key</item>
+        <item>@string/hamlet_key</item>
+    </string-array>
+    <string-array name="list_titles">
+        <item>@string/twodoo_title</item>
+        <item>@string/dontdoo_title</item>
+        <item>@string/undoo_title</item>
+        <item>@string/cantdoo_title</item>
+        <item>@string/candoo_title</item>
+        <item>@string/bartleby_title</item>
+        <item>@string/hamlet_title</item>
+    </string-array>
+    <string-array name="list_icons">
+        <item>@drawable/twodoo_launcher</item>
+        <item>@drawable/twodoo_launcher</item>
+        <item>@drawable/twodoo_launcher</item>
+        <item>@drawable/twodoo_launcher</item>
+        <item>@drawable/twodoo_launcher</item>
+        <item>@drawable/twodoo_launcher</item>
+    </string-array>
+    <!-- 
+    <string-array name="list_icons">
+        <item>@string/twodoo_icon</item>
+        <item>@string/dontdoo_icon</item>
+        <item>@string/undoo_icon</item>
+        <item>@string/cantdoo_icon</item>
+        <item>@string/candoo_icon</item>
+        <item>@string/bartleby_icon</item>
+        <item>@string/hamlet_icon</item>
+    </string-array>
+    -->
 </resources>
