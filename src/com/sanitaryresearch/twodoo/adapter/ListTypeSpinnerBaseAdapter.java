@@ -1,6 +1,11 @@
-package com.sanitaryresearch.twodoo.view;
+package com.sanitaryresearch.twodoo.adapter;
 
 import java.util.ArrayList;
+
+import com.sanitaryresearch.pojo.ListTypeHolder;
+import com.sanitaryresearch.twodoo.view.R;
+//import com.sanitaryresearch.twodoo.view.R.id;
+//import com.sanitaryresearch.twodoo.view.R.layout;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,12 +16,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
  
-public class ListTypeSpinnerAdapterA extends BaseAdapter {
+public class ListTypeSpinnerBaseAdapter extends BaseAdapter {
  
     Context context;
     ArrayList<ListTypeHolder> objects;
  
-    public ListTypeSpinnerAdapterA(Context context, ArrayList<ListTypeHolder> objects) {
+    public ListTypeSpinnerBaseAdapter(Context context, ArrayList<ListTypeHolder> objects) {
         super();
         this.context = context;
         this.objects = objects;

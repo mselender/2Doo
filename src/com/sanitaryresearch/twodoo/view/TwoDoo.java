@@ -7,27 +7,43 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.graphics.drawable.Drawable;
+import android.content.res.Resources;
+//import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import com.sanitaryresearch.pojo.ListHolder;
+import com.sanitaryresearch.pojo.ListTypeHolder;
+import com.sanitaryresearch.pojo.PrefsHolder;
+import com.sanitaryresearch.twodoo.adapter.ListTypeSpinnerBaseAdapter;
+import com.sanitaryresearch.twodoo.adapter.ListsBaseAdapter;
+import com.sanitaryresearch.twodoo.database.DooDBQueries;
+//import android.content.SharedPreferences;
+//import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+//import android.graphics.drawable.Drawable;
+//import android.view.KeyEvent;
+//import android.widget.AdapterView;
+//import android.widget.AdapterView.OnItemSelectedListener;
+//import android.widget.ArrayAdapter;
+//import android.widget.Button;
+//import android.widget.TextView;
+//import android.widget.TextView.OnEditorActionListener;
 
 //import com.sanitaryresearch.twodoo.R;
 //import android.app.AlertDialog;
@@ -36,8 +52,24 @@ import android.widget.Toast;
 //import android.content.res.Resources;
 
 
-public class TwoDoo extends Activity implements OnClickListener{
+public class TwoDoo extends Activity 
+	implements OnClickListener, OnLongClickListener{
 	
+	/*Context */
+	Context context;
+	Resources resources;
+	/*Components */
+	View aboutButton;
+	View newListButton;
+	EditText editText;
+	Spinner spinner;
+	ListView listView;
+	/* preferences */
+	SharedPreferences preferences;
+	Prefs prefs;
+	/* Adapters */
+	/* Listeners */
+	/* lists */
 	List<String> enabledListTypeKeys;
 	List<String> enabledListTypeNames;
 	List<Integer> enabledListTypeIcons;
@@ -49,82 +81,35 @@ public class TwoDoo extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_LEFT_ICON);
 		setContentView(R.layout.activity_two_doo);
-		//getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.twodoo_launcher);
 		getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.string.twodoo_icon);
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		this.setTitle(R.string.app_long_name);
 		
-		Context context = getApplicationContext();
-	
-		//Resources res = ctx.getResources();
+		context = getApplicationContext();
+		//resources = ctx.getResources();
 		
+		/* initialize preferences */
 		PreferenceManager.setDefaultValues(this, R.xml.settings, false);
-	
-		//addPreferencesFromResource(R.xml.settings);
-				
-		//TextView textViewDescription = (TextView)findViewById(R.id.description);
-		//textViewDescription.setTextSize(getResources().getDimension(R.dimen.textsize));
-		//textViewDescription.setTextSize(res.getDimension(R.dimen.textsize));
+		prefs = new Prefs();
 		
+		/* get view components */
+		AccessComponents();
 		
-	    View aboutButton = findViewById(R.id.about_button);
-	    aboutButton.setOnClickListener(this);
-	    View newListButton = findViewById(R.id.new_list_button);
-	    newListButton.setOnClickListener(this);
+		/* listeners */
+	    AccessListeners();
+		
+		/* get preferences */
+		preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		/*Adapters*/
+	    AccessAdapters();
 	  
 	    /* set up spinner to have only enabled list types */
 	    RefreshSpinner(context);
-	   
-	    /* set up text edit */
-		EditText editText = (EditText) findViewById(R.id.new_list_input_text);
-		editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-		
-		
-		
-		
-		/* listeners */
-		/* not working yet */
-		/*
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		OnSharedPreferenceChangeListener sharedPrefsListener = new SharedPreferences.OnSharedPreferenceChangeListener(){
-		   public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-		     // Implementation
-			   Context context = getApplicationContext();
-			   RefreshSpinner(context);
-		   };
-		 };
-		
-		prefs.registerOnSharedPreferenceChangeListener(sharedPrefsListener);
-		*/
-		
-		/*
-		editText.setOnEditorActionListener(new OnEditorActionListener() {
-			@Override
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				boolean handled = false;
-				if (actionId == EditorInfo.IME_ACTION_SEND) {
-					//sendMessage();
-					handled = true;
-				}
-				return handled;
-			}
-		});
-		*/
-	    /*
-	    Spinner listTypeSelector = (Spinner)findViewById(R.id.new_list_type_selector);
-	    listTypeSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
-	    	@Override
-	    	public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-	    		//String list_key = parentView.getItemAtPosition(position).toString();
-	    		int icon_key = enabledListTypeIcons.get(position);
-	    		Button newListButton = (Button) findViewById(R.id.new_list_button);
-	    		newListButton.setCompoundDrawablesWithIntrinsicBounds(icon_key, 0, 0, 0); 
-	        }
-	    	 @Override
-    	    public void onNothingSelected(AdapterView<?> parentView) {
-    	        // your code here
-    	    }
-	    });
-	    */
+	    
+	    /*Retrieve list of lists */
+	    RefreshLists(context);
+	    
 	}
 	
 	@Override
@@ -132,9 +117,12 @@ public class TwoDoo extends Activity implements OnClickListener{
 	      super.onResume();
 	     
 	      /* until we have a listener working for preference changes sett up, we'll refresh spinner here */
-	      Context context = getApplicationContext();
-	      RefreshSpinner(context);
-	    
+	      //prefs = new Prefs();
+	      if (prefs.getPreferencesChanged()) {
+	    	  	context = getApplicationContext();
+	      	RefreshSpinner(context);
+	      	prefs.setPreferencesChanged(false);
+	      }
 	   }
 
 	   @Override
@@ -168,72 +156,175 @@ public class TwoDoo extends Activity implements OnClickListener{
 	      }
 	      return false;
 	   }
+	 
+	 private void AccessComponents() {
+		 	 		 
+		 editText = (EditText) findViewById(R.id.new_list_input_text);
+		 editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+		 spinner = (Spinner) findViewById(R.id.new_list_type_selector);
+		 newListButton = findViewById(R.id.new_list_button);
+		 //newListButton.setOnClickListener(this);
+		 listView = (ListView)findViewById(R.id.lists_view);
+		 aboutButton = findViewById(R.id.about_button);
+		 //aboutButton.setOnClickListener(this);
+		 
+	 }
+	 /* we want the main view to catch the change when it resumes - 
+	    will a listener in main activity work in delayed fashion? */
+	 private void AccessListeners() {
+		
+		 newListButton.setOnClickListener(this);
+		 aboutButton.setOnClickListener(this);
+		 //listView.setOnClickListener(this);
+		 //listView.setOnLongClickListener(this);
+		 
+		 /* not needed */
+		 /*
+		OnSharedPreferenceChangeListener sharedPrefsListener = new SharedPreferences.OnSharedPreferenceChangeListener(){
+		   public void onSharedPreferenceChanged(SharedPreferences sharedpreferences, String key) {
+		     // Implementation
+			   context = getApplicationContext();
+			   RefreshSpinner(context);
+		   };
+		};
+		
+		preferences.registerOnSharedPreferenceChangeListener(sharedPrefsListener);
+		*/
+		/* not needed */
+		/*
+		editText.setOnEditorActionListener(new OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				boolean handled = false;
+				if (actionId == EditorInfo.IME_ACTION_SEND) {
+					//sendMessage();
+					handled = true;
+				}
+				return handled;
+			}
+		});
+		*/
 	
-	public void onClick(View v) {
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					
+			}
+		});
+		
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				return true;	 //so it compile for now
+			}
+		});
+	 }
+	 
+	 private void AccessAdapters() {
+		 
+		
+	 }
+	
+	 public void onClick(View v) {
 	      switch (v.getId()) {
-	      case R.id.about_button:
+	      	case R.id.about_button:
 		         Intent about = new Intent(this, About.class);
 		         startActivity(about);
 		         break;
 	      	case R.id.new_list_button:
 	      		
-		      	 Context context = getApplicationContext();
-		      	 int duration = Toast.LENGTH_SHORT;
+		      	 context = getApplicationContext();
+		      	 //int duration = Toast.LENGTH_SHORT;
 		      	
-			     EditText editText = (EditText) findViewById(R.id.new_list_input_text);
-			     String newListName = editText.getText().toString();
-		    	 //Toast toast = Toast.makeText(context, newListName, duration);
-		    	 //toast.show();
-		    	 
-		    	 Spinner spinner = (Spinner) findViewById(R.id.new_list_type_selector);
-		    	 String listTypeName = spinner.getSelectedItem().toString();
-		    	 Integer pos = spinner.getSelectedItemPosition();
-		    	 //toast = Toast.makeText(context, listTypeName, duration);   	 
-		    	 //toast.show();
-		    	 
-		    	 //Intent newListMenu = new Intent(this, NewListMenu.class);
-		    	 /*
-		    	 Intent newListMenu = new Intent(this, NewListMenu.class);
-		         startActivity(newListMenu);
-		         break;
-		         */
+			     editText = (EditText) findViewById(R.id.new_list_input_text);
+			     String listName = editText.getText().toString();
+			    	 //Toast toast = Toast.makeText(context, newListName, duration);
+			    	 //toast.show();
+			    	 int selectedPosition = spinner.getSelectedItemPosition();
+			    	 ListTypeHolder listTypeHolder = (ListTypeHolder)spinner.getAdapter().getItem(selectedPosition);
+			    	 String listType = listTypeHolder.getKey();
+			    	 //listType = enabledListTypeKeys.get(selectedPosition);
+			    	 //toast = Toast.makeText(context, listTypeName, duration);   	 
+			    	 //toast.show();
+			    	 
+			    	 DooDBQueries db = new DooDBQueries(context);
+			    	 boolean succeeded = db.insertNewList(listName, listType);
+			    	 if (succeeded) {
+			    		 RefreshLists(context);
+			    		 editText.setText("");
+			    	 }
+			    	 
+			    	 
+			    	 //Intent newListMenu = new Intent(this, NewListMenu.class);
+			    	 /*
+			    	 Intent newListMenu = new Intent(this, NewListMenu.class);
+			         startActivity(newListMenu);
+			         break;
+			         */
 			}
+	}
+	 
+	 @Override
+	public boolean onLongClick(View v) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	private void RefreshSpinner(Context context) {
 		
 	    /* set up spinner to have only enabled list types */
 		
-	    Prefs prefs = new Prefs();
+	    //prefs = new Prefs();
 	    PrefsHolder prefsHolder = prefs.getEnabledPrefs(context);
 	    enabledListTypeKeys = prefsHolder.getTypeKeys();
 		enabledListTypeNames = prefsHolder.getTypeNames();
 		enabledListTypeIcons = prefsHolder.getTypeIcons();
-	    Spinner spinner = (Spinner) findViewById(R.id.new_list_type_selector); 
-	    /*
-	    ArrayAdapter a = new ArrayAdapter(this, android.R.layout.simple_spinner_item, enabledListTypeNames);
-	    *./
-	    /*
-	    ListTypeSpinnerAdapter adapter = new ListTypeSpinnerAdapter(context, android.R.layout.simple_spinner_item, enabledListTypeNames, enabledListTypeIcons);  
-	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	    spinner.setAdapter(adapter);
-	    */
+	    spinner = (Spinner) findViewById(R.id.new_list_type_selector); 
 	   
 	    ArrayList<ListTypeHolder> objects = new ArrayList<ListTypeHolder>();
         for (int k = 0; k < enabledListTypeKeys.size(); k++) {
         	ListTypeHolder obj = new ListTypeHolder();
-            obj.setAll(R.drawable.twodoo_launcher, enabledListTypeNames.get(k));
+            obj.setAll(enabledListTypeIcons.get(k), enabledListTypeNames.get(k), enabledListTypeKeys.get(k));
             objects.add(obj);
         }
- 
-        spinner.setAdapter(new ListTypeSpinnerAdapterA(this, objects));
-		
+    
+        /*
+	    ArrayAdapter a = new ArrayAdapter(this, android.R.layout.simple_spinner_item, enabledListTypeNames);
+	    */
+	    /*
+	    ListTypeSpinnerArrayAdapter adapter = new ListTypeSpinnerArrayAdapter(context, android.R.layout.simple_spinner_item, enabledListTypeNames, enabledListTypeIcons);  
+	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	    spinner.setAdapter(adapter);
+	    */
+        
+        spinner.setAdapter(new ListTypeSpinnerBaseAdapter(this, objects));	
+        spinner.setSelection(0);
 		
 	}
 	
+	public void RefreshLists(Context context) {
+		
+		 	DooDBQueries db = new DooDBQueries(context);
+	        List<ListHolder> lists = (List<ListHolder>)db.getAllLists();
+	        ListView listView = (ListView)findViewById(R.id.lists_view); 
+	        listView.setAdapter(new ListsBaseAdapter(this, lists));
+	 
+	}
+	/*
+	private void ResizeNewListButton() {
+		
+  		ViewGroup.LayoutParams spinnerParams = spinner.getLayoutParams();
+  		ViewGroup.LayoutParams buttonParams = newListButton.getLayoutParams();
+  	    buttonParams.height = spinnerParams.height;
+  	    newListButton.setLayoutParams(buttonParams); 
+  	    newListButton.refreshDrawableState();
+	}
+	*/
 
-
+	
 }
+
+
 
 
 
@@ -246,3 +337,18 @@ Then, set your contentView(R.layout.youLayout); and then use this:
 getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, android.R.drawable.ic_dialog_alert);
  */
 		
+
+/*
+listTypeSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
+	@Override
+	public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+		//String list_key = parentView.getItemAtPosition(position).toString();
+		int icon_key = enabledListTypeIcons.get(position);
+		newListButton.setCompoundDrawablesWithIntrinsicBounds(icon_key, 0, 0, 0); 
+    }
+	 @Override
+    public void onNothingSelected(AdapterView<?> parentView) {
+        // your code here
+    }
+});
+*/

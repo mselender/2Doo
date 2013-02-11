@@ -1,4 +1,4 @@
-package com.sanitaryresearch.twodoo.view;
+package com.sanitaryresearch.pojo;
 
 import java.util.ArrayList;
 import java.util.List;

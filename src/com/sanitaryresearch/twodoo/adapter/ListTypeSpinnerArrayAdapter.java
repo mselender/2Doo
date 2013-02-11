@@ -1,6 +1,10 @@
-package com.sanitaryresearch.twodoo.view;
+package com.sanitaryresearch.twodoo.adapter;
 
 import java.util.List;
+
+import com.sanitaryresearch.twodoo.view.R;
+//import com.sanitaryresearch.twodoo.view.R.id;
+//import com.sanitaryresearch.twodoo.view.R.layout;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,18 +15,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListTypeSpinnerAdapter extends ArrayAdapter{
+public class ListTypeSpinnerArrayAdapter extends ArrayAdapter<String>{
 	
 	List<String> listTypeNames;
 	List<Integer> listTypeIcons;
 	Context context;
 		 
-	public ListTypeSpinnerAdapter(Context context, int textViewResourceId) {
+	public ListTypeSpinnerArrayAdapter(Context context, int textViewResourceId) {
           super(context, textViewResourceId);
           this.context = context;
     }
 	
-	public ListTypeSpinnerAdapter(Context context, int textViewResourceId, List<String> listTypeNames, List<Integer> listTypeIcons) {
+	public ListTypeSpinnerArrayAdapter(Context context, int textViewResourceId, List<String> listTypeNames, List<Integer> listTypeIcons) {
 		super(context, textViewResourceId);
         this.context = context;
         this.listTypeNames = listTypeNames;
@@ -55,6 +59,7 @@ public class ListTypeSpinnerAdapter extends ArrayAdapter{
  
         ImageView icon = (ImageView) item.findViewById(R.id.list_image);
         icon.setImageResource(listTypeIcons.get(position));   
+        //ViewGroup.setImageResource(listTypeIcons.get(position));  
       
         return item;
      }

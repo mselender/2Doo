@@ -4,6 +4,10 @@ package com.sanitaryresearch.twodoo.view;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.sanitaryresearch.pojo.ListTypeHolder;
+import com.sanitaryresearch.pojo.PrefsHolder;
+//import com.sanitaryresearch.twodoo.adapter.ListTypeSpinnerBaseAdapter;
 //import java.util.Map;
 //import java.util.prefs.Preferences;
 
@@ -18,26 +22,24 @@ import android.os.Bundle;
 //import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+//import android.widget.Spinner;
 
 public class Prefs extends PreferenceActivity 
 	implements OnSharedPreferenceChangeListener {
    // Option names and default values
+	
+	private static Boolean preferencesChanged;
    
 	@Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       addPreferencesFromResource(R.xml.settings);
-     
+     setPreferencesChanged(false);
    }
-   /** Get the current value of the music option */
-   
-   public static boolean getEnabled(Context context, String key, Boolean defaultState) {
-	   return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key,defaultState);
-
-   }  
-   
+  
    public PrefsHolder getEnabledPrefs(Context context) {
 	   
+	   setPreferencesChanged(false);
 	   Resources res = context.getResources();
 	   List<String> enabledListTypeKeys = new ArrayList<String>();
 	   List<String> enabledListTypeNames = new ArrayList<String>();
@@ -66,22 +68,35 @@ public class Prefs extends PreferenceActivity
    @Override
    protected void onResume() {
        super.onResume();
-       // Set up a listener whenever a key changes
+       // Set up a listener we enter prefs menu
+      
        getPreferenceScreen().getSharedPreferences()
                .registerOnSharedPreferenceChangeListener(this);
+       //preferencesChanged = false;
+      
    }
 
    @Override
    protected void onPause() {
        super.onPause();
-       // Unregister the listener whenever a key changes
+       // Unregister the listener when we leave prefs menu
+       
        getPreferenceScreen().getSharedPreferences()
                .unregisterOnSharedPreferenceChangeListener(this);
+      
+   }
+	
+   @Override
+   public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+      // TODO Auto-generated method stub
+     setPreferencesChanged(true);
    }
 
-   public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,String key) 
-   {
-     // do stuff
+   public Boolean getPreferencesChanged() {
+	  return preferencesChanged;
    }
-
+	
+   public void setPreferencesChanged(Boolean preferencesChanged) {
+	  Prefs.preferencesChanged = preferencesChanged;
+   }
 }
