@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -53,7 +54,8 @@ import com.sanitaryresearch.twodoo.database.DooDBQueries;
 
 
 public class TwoDoo extends Activity 
-	implements OnClickListener, OnLongClickListener{
+	 implements OnClickListener, OnLongClickListener,
+		OnItemClickListener, OnItemLongClickListener { 
 	
 	/*Context */
 	Context context;
@@ -67,12 +69,12 @@ public class TwoDoo extends Activity
 	/* preferences */
 	SharedPreferences preferences;
 	Prefs prefs;
+	int selectedItem = -1;
+	protected Object mActionMode;
 	/* Adapters */
 	/* Listeners */
 	/* lists */
-	List<String> enabledListTypeKeys;
-	List<String> enabledListTypeNames;
-	List<Integer> enabledListTypeIcons;
+	
 	//Context context;
 	
 
@@ -208,13 +210,23 @@ public class TwoDoo extends Activity
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					
+					selectedItem = position;
 			}
 		});
 		
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				/*
+				if (mActionMode != null) {
+					return false;
+				}
+				selectedItem = position;
+				mActionMode = TwoDoo.this.startActivity(Intent intent);
+				*/
+				Intent listLongClickMenu = new Intent(context, ListLongClickMenu.class);
+		        startActivity(listLongClickMenu);
+		        view.setSelected(true);
 				return true;	 //so it compile for now
 			}
 		});
@@ -264,16 +276,13 @@ public class TwoDoo extends Activity
 			}
 	}
 	 
-	 @Override
-	public boolean onLongClick(View v) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	private void RefreshSpinner(Context context) {
 		
 	    /* set up spinner to have only enabled list types */
-		
+		List<String> enabledListTypeKeys;
+		List<String> enabledListTypeNames;
+		List<Integer> enabledListTypeIcons;
 	    //prefs = new Prefs();
 	    PrefsHolder prefsHolder = prefs.getEnabledPrefs(context);
 	    enabledListTypeKeys = prefsHolder.getTypeKeys();
@@ -320,7 +329,25 @@ public class TwoDoo extends Activity
   	    newListButton.refreshDrawableState();
 	}
 	*/
+	
+	@Override
+	public boolean onLongClick(View v) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
+	@Override
+	public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View view, int position, long aid) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
 

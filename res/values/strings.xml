@@ -10,7 +10,7 @@
     <string name="about_dialog_title">About 2 Doo &#8212; The @pp that helps you get cr@p done!</string>
     <string name="new_list_button_text">New List</string>
     <string name="new_list_input_hint">enter name for your new list</string>
-    <string name="new_list_dialog_title">Let\'s get some cr@p done &#8212; Start a new list!</string>
+    <string name="list_long_click_dialog_title">Rearrange your cr@p!</string>
     <string name="about_text">
 		<p>Need to keep track of work to be done? Use a <b>2 Doo</b> list.\n</p>
 		<p>Trying to get rid of some nasty habits? Use a <b>Don\'t Doo</b> list.</p>\n
@@ -19,6 +19,10 @@
 		<p><i>You\'ve got to manage a lot of crap in your life &#8212; We help you doo it!</i></p>
 	</string>
 	
+    <string name="rename">Rename</string>
+    <string name="delete">Delete</string>
+    <string name="redoo">ReDoo</string>
+    
     <string name="standard_group_key">standard</string>
     <string name="enterprise_group_key">enterprise</string>
     <string name="literary_group_key">literary</string>

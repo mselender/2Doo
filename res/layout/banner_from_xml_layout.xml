@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mm="http://millennialmedia.com/android/schema"
+    android:id="@+id/adXmlRelativeLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/darker_gray" >
+
+    <com.millennialmedia.android.MMAdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:minHeight="53dp"
+        mm:accelerate="true"
+        mm:adType="MMBannerAdBottom"
+        mm:apid="28911"
+        mm:refreshInterval="30" />
+
+</RelativeLayout>
+<!-- 
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mm="http://millennialmedia.com/android/schema"
+    android:id="@+id/adXmlRelativeLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/darker_gray" >
+    <com.millennialmedia.android.MMAdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:minHeight="53dp"
+        mm:accelerate="true"
+        mm:adType="MMBannerAdBottom"
+        mm:age="46"
+        mm:apid="91528"
+        mm:children="2"
+        mm:education="college"
+        mm:ethnicity="hispanic"
+        mm:gender="male"
+        mm:income="75000"
+        mm:marital="married"
+        mm:orientation="straight"
+        mm:politics="libertarian"
+        mm:refreshInterval="30"
+        mm:zip="94105" />
+</RelativeLayout>
+ -->

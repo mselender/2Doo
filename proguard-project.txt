@@ -18,3 +18,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keep public class com.millennialmedia.android.* {
+	<init>(...);
+	public void *(...);
+	public com.millennialmedia.android.MMJSResponse *(...);
+}

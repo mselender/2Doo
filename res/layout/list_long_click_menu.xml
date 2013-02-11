@@ -10,24 +10,24 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" >
 		<Button
-	        android:id="@+id/twodoo_Button"
+	        android:id="@+id/rename_List_Button"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/twodoo_title" >
+	        android:text="@string/rename" >
 	    </Button>
 	    <Button
-	        android:id="@+id/dontdoo_Button"
+	        android:id="@+id/delete_List_Button"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/dontdoo_title" 
-	        android:layout_below="@id/twodoo_Button">
+	        android:text="@string/delete" 
+	        android:layout_below="@id/rename_List_Button">
 	    </Button>
 	    <Button
-	        android:id="@+id/undoo_Button"
+	        android:id="@+id/redoo_List_Button"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/undoo_title" 
-	        android:layout_below="@id/dontdoo_Button">
+	        android:text="@string/redoo" 
+	        android:layout_below="@id/delete_List_Button">
 	    </Button>
 	</RelativeLayout>
 </ScrollView>

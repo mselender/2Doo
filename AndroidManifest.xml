@@ -7,7 +7,14 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="10" />
-
+	<supports-screens android:smallScreens="true" 
+	    android:normalScreens="true" 
+	    android:largeScreens="true" 
+	    android:xlargeScreens="true" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/twodoo_launcher"
@@ -28,13 +35,20 @@
 			android:label="@string/about_dialog_title"
 			android:theme="@android:style/Theme.Dialog">
 		</activity>
-		<activity android:name=".NewListMenu"
-			android:label="@string/new_list_dialog_title"
+		<activity android:name="com.sanitaryresearch.twodoo.view.ListLongClickMenu"
+			android:label="@string/list_long_click_dialog_title"
 			android:theme="@android:style/Theme.Dialog">
 		</activity>
 		    <activity android:name=".Prefs"
 			android:label="@string/settings_title">
 		</activity>
+		<!-- SDK Activities -->
+		<activity android:name="com.millennialmedia.android.MMActivity"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			android:configChanges="keyboardHidden|orientation|keyboard" >
+		</activity>
+		<activity android:name="com.millennialmedia.android.VideoPlayer"
+			android:configChanges="keyboardHidden|orientation|keyboard" >
+		</activity>
     </application>
-
 </manifest>

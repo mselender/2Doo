@@ -5,11 +5,11 @@ package com.sanitaryresearch.twodoo.view;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class NewListMenu extends Activity {
+public class ListLongClickMenu extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.new_list_menu);
+		setContentView(R.layout.list_long_click_menu);
 	}
 }
